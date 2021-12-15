@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class Answer extends StatelessWidget {
   final VoidCallback? answerFunction;
-  Answer({this.answerFunction});
+  final String? answer;
+  Answer({this.answerFunction, this.answer});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +11,7 @@ class Answer extends StatelessWidget {
         width: double.infinity,
         margin: EdgeInsets.all(10),
         child: RaisedButton(
-          child: const Text('Hossein'),
+          child: Text(answer as String),
           onPressed: answerFunction,
         ));
   }

@@ -14,7 +14,16 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _questionIndex = 0;
 
-  List<String> question = ['Fav You Name ?', 'Fav Your Color'];
+  var question = [
+    {
+      'questionText': 'Fav You Name ?',
+      'questionAnswers': ['Hossein', 'Ali', 'Hassan']
+    },
+    {
+      'questionText': 'Fav Your Color',
+      'questionAnswers': ['Red', 'Green', 'Blue']
+    }
+  ];
 
   void answerQuestion() {
     setState(() {
@@ -33,18 +42,12 @@ class _MyAppState extends State<MyApp> {
       body: SafeArea(
         child: Column(
           children: [
-            Question(question: question[_questionIndex]),
-            // ignore: deprecated_member_use
-            Answer(
-              answerFunction: answerQuestion,
-            ),
-            // ignore: deprecated_member_use
-            Answer(
-              answerFunction: answerQuestion,
-            ),
-            Answer(
-              answerFunction: answerQuestion,
-            ),
+            Question(
+                question: question[_questionIndex]['questionText'] as String),
+            ...(question[_questionIndex]['questionAnswers'] as List<String>)
+                .map((ans) {
+              return Answer(answerFunction: answerQuestion, answer: ans);
+            }).toList()
           ],
         ),
       ),
