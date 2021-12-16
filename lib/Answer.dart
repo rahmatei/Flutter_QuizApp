@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Answer extends StatelessWidget {
-  final VoidCallback? answerFunction;
-  final String? answer;
-  Answer({this.answerFunction, this.answer});
+  final VoidCallback answerFunction;
+  final String answer;
+  Answer({required this.answerFunction, required this.answer});
 
   @override
   Widget build(BuildContext context) {

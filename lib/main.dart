@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'Question.dart';
-import 'Answer.dart';
+import 'package:quiz_app/Result.dart';
+import 'Quiz.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,22 +13,32 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _questionIndex = 0;
+  int _totalScoor = 0;
 
   var question = [
     {
       'questionText': 'Fav You Name ?',
-      'questionAnswers': ['Hossein', 'Ali', 'Hassan']
+      'questionAnswers': [
+        {'text': 'Hossein', 'rate': 100},
+        {'text': 'Ali', 'rate': 50},
+        {'text': 'Hassan', 'rate': 40},
+      ]
     },
     {
       'questionText': 'Fav Your Color',
-      'questionAnswers': ['Red', 'Green', 'Blue']
+      'questionAnswers': [
+        {'text': 'Red', 'rate': 40},
+        {'text': 'Green', 'rate': 30},
+        {'text': 'Blue', 'rate': 20},
+      ]
     }
   ];
 
-  void answerQuestion() {
+  void answerQuestion(int scoor) {
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
+    _totalScoor += scoor;
     print(_questionIndex);
   }
 
@@ -40,16 +50,13 @@ class _MyAppState extends State<MyApp> {
         title: const Text('Quiz APP'),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Question(
-                question: question[_questionIndex]['questionText'] as String),
-            ...(question[_questionIndex]['questionAnswers'] as List<String>)
-                .map((ans) {
-              return Answer(answerFunction: answerQuestion, answer: ans);
-            }).toList()
-          ],
-        ),
+        child: _questionIndex < question.length
+            ? Quiz(
+                answerQuestion: answerQuestion,
+                question: question,
+                questionIndex: _questionIndex,
+              )
+            : Result(),
       ),
     ));
   }
