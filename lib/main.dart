@@ -34,6 +34,13 @@ class _MyAppState extends State<MyApp> {
     }
   ];
 
+  void _resetQuestion() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScoor = 0;
+    });
+  }
+
   void answerQuestion(int scoor) {
     setState(() {
       _questionIndex = _questionIndex + 1;
@@ -56,7 +63,10 @@ class _MyAppState extends State<MyApp> {
                 question: question,
                 questionIndex: _questionIndex,
               )
-            : Result(),
+            : Result(
+                scoor: _totalScoor,
+                resetQuestion: _resetQuestion,
+              ),
       ),
     ));
   }

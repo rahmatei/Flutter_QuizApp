@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'CustomButton.dart';
 
 class Answer extends StatelessWidget {
   final VoidCallback answerFunction;
@@ -10,8 +11,8 @@ class Answer extends StatelessWidget {
     return Container(
         width: double.infinity,
         margin: EdgeInsets.all(10),
-        child: RaisedButton(
-          child: Text(answer as String),
+        child: ElevatedButton(
+          child: Text(answer),
           onPressed: answerFunction,
         ));
   }
